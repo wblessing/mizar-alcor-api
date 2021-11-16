@@ -2,6 +2,7 @@ const data = require('../data/dashboard');
 const { requireAuth } = require('../lib/auth');
 
 exports.handler = requireAuth(async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
   try {
     return callback(null, {
       statusCode: 200,

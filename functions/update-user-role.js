@@ -6,13 +6,10 @@ exports.handler = requireAuth(async (event, context, callback) => {
   try {
     const { claims } = context.identityContext;
     const userId = getUserId(claims);
-
     const User = await UserConnection.createConnection();
 
     const body = JSON.parse(event.body);
-
     const { role } = body;
-
     const allowedRoles = ['user', 'admin'];
 
     if (!allowedRoles.includes(role)) {
@@ -29,8 +26,7 @@ exports.handler = requireAuth(async (event, context, callback) => {
     return callback(null, {
       statusCode: 200,
       body: JSON.stringify({
-        message:
-          'User role updated. You must log in again for the changes to take effect.',
+        message: 'User role updated. Sorry this is not working yet.',
       }),
     });
   } catch (err) {

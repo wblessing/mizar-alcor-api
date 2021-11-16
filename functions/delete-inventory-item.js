@@ -8,15 +8,15 @@ exports.handler = requireScope(
     try {
       const { claims } = context.identityContext;
       const userId = getUserId(claims);
-
       const queryString = event.path;
-      const id = queryString.split('/')[2];
+      const id = queryString.split('/')[3];
 
       const InventoryItem = await InventoryItemConnection.createConnection();
       const deletedItem = await InventoryItem.findOneAndDelete({
         _id: id,
         user: userId,
       });
+
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify({

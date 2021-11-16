@@ -1,7 +1,8 @@
 const { coursesTable } = require('./helpers/airtable');
 const formattedReturn = require('./helpers/formattedReturn');
 
-exports.handler = async (event) => {
+exports.handler = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
   const { id, ...fields } = JSON.parse(event.body);
   try {
     const updatedCourse = await coursesTable.update([{ id, fields }]);
